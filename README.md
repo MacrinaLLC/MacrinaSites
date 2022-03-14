@@ -19,7 +19,7 @@ brew install publish
 2. Create an empty folder with the name of your website.
 3. Inside of the folder run the following script.
 ```
-// TODO
+curl -s https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/setup.sh | bash
 ```
 4. Add MacrinaSites as a dependency to your `Package.swift` file.
 ```
