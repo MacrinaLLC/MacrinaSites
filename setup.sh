@@ -1,6 +1,6 @@
 #!/bin/sh
 
-curl https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/setup/setup.swift --output .setup.swift
+curl https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/.setup.sh --output .setup.swift
 chmod +x setup.swift
 ./.setup.swift
 rm .setup.swift
