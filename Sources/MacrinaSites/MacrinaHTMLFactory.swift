@@ -52,7 +52,7 @@ public struct MacrinaHTMLFactory<Site: Website>: HTMLFactory {
         HTML(
             .lang(language),
             .head(
-                .stylesheet("https://raw.githubusercontent.com/JarWarren/air/master/css/air.css"),
+                .stylesheet("/air.css"),
                 .favicon("/favicon.ico", type: "image/ico"),
                 .meta(.charset(.utf8)),
                 .meta(
