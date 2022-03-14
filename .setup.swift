@@ -85,7 +85,7 @@ extension Data {
 
 func downloadCSS(completion: @escaping (Result<Void, Error>) -> Void) {
     print("Downloading \(TerminalColors.green)air.css\(TerminalColors.default) to Resources/")
-    guard let url = URL(string: "https://github.com/JarWarren/air/blob/master/css/air.css") else {
+    guard let url = URL(string: "https://raw.githubusercontent.com/JarWarren/air/master/css/air.css") else {
         return completion(.failure(SetupError(errorDescription: "Invalid URL for css")))
     }
     URLSession.shared.dataTask(with: url) { data, _, error in
@@ -119,7 +119,7 @@ func failure(_ error: Error) {
 
 func downloadTemplate(completion: @escaping (Result<Void, Error>) -> Void) {
     print("Downloading \(TerminalColors.green)main.swift\(TerminalColors.default) template to Sources/\(currentDirectoryName)/")
-    guard let url = URL(string: "https://github.com/MacrinaLLC/MacrinaSites/blob/master/Template.swift") else {
+    guard let url = URL(string: "https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/Template.swift") else {
         return completion(.failure(SetupError(errorDescription: "Invalid URL for template")))
     }
     URLSession.shared.dataTask(with: url) { data, _, error in
