@@ -24,7 +24,7 @@ brew install publish
 ```
 5. In the same, root folder of your project, run the following script to generate a template and add css to your project.
 ```
-todo
+curl -s https://github.com/MacrinaLLC/MacrinaSites/blob/master/setup.swift
 ```
 6. Whenever you're ready, use `publish run` to generate your website in the `Output` folder. If needed, more detailed instructions can be found on the Publish readme.
 ### Acknowledgements
