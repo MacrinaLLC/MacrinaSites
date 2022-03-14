@@ -5,20 +5,25 @@
 //  Created by jarwarren on 3/13/22.
 //
 
+import Foundation
 import Plot
 import Publish
 
 public struct MacrinaHTMLFactory<Site: Website>: HTMLFactory {
-    private var sections: [MacrinaSections] { MacrinaSections.allCases }
+    private var sections: [MacrinaSection] { MacrinaSection.allCases }
     public func makeIndexHTML(for index: Index, context: PublishingContext<Site>) throws -> HTML {
         makeHTML(for: 0, language: context.site.language)
     }
     
     public func makeSectionHTML(for section: Section<Site>, context: PublishingContext<Site>) throws -> HTML {
-        makeHTML(
-            for: (section.id as? MacrinaSections)?.index ?? 0,
-               language: context.site.language
-        )
+        if let section = section.id as? MacrinaSection {
+            return makeHTML(
+                for: section.index,
+                   language: context.site.language
+            )
+        } else {
+            return filler("Section")
+        }
     }
     
     public func makeItemHTML(for item: Item<Site>, context: PublishingContext<Site>) throws -> HTML {
@@ -30,11 +35,11 @@ public struct MacrinaHTMLFactory<Site: Website>: HTMLFactory {
     }
     
     public func makeTagListHTML(for page: TagListPage, context: PublishingContext<Site>) throws -> HTML? {
-        nil
+        filler("Tag List")
     }
     
     public func makeTagDetailsHTML(for page: TagDetailsPage, context: PublishingContext<Site>) throws -> HTML? {
-        nil
+        filler("Tag Details")
     }
     
     private func filler(_ text: String) -> HTML {

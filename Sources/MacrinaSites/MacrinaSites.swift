@@ -9,7 +9,7 @@ import Foundation
 import Plot
 import Publish
 
-public protocol MacrinaWebpage: Component {
+public protocol MacrinaPage: Component {
     /// User-facing name of the webpage.
     var title: String { get }
     /// Path to the webpage. Ex. `"/contact"`
@@ -34,17 +34,36 @@ public protocol MacrinaWebsite {
     /// The website's favicon, if any.
     var favicon: Favicon? { get }
     /// Primary content of the website. Each page is given a link at the top of the website.
-    var pages: [MacrinaWebpage] { get }
+    var pages: [MacrinaPage] { get }
 }
 
 public extension MacrinaWebsite {
     var language: Language { .usEnglish }
-    func publish() throws {
-        MacrinaSections.allCases = pages
+    func publish(file: StaticString = #file) throws {
+        MacrinaSection.allCases = pages
             .enumerated()
             .compactMap(PublishWebsite.SectionID.init)
+        guard let containingFolder = URL(string: "\(file)") else { throw MacrinaError.unableToLocateRootFolder }
+        let root = containingFolder
+           .deletingPathExtension()
+           .deletingLastPathComponent()
+           .deletingLastPathComponent()
+           .deletingLastPathComponent()
         try PublishWebsite(website: self)
-            .publish(withTheme: .macrina)
+            .publish(
+                withTheme: .macrina,
+                at: Path(root.absoluteString)
+            )
+    }
+}
+
+enum MacrinaError: LocalizedError {
+    case unableToLocateRootFolder
+    var errorDescription: String? {
+        switch self {
+        case .unableToLocateRootFolder:
+            return "Unable to locate the root folder."
+        }
     }
 }
 
@@ -63,19 +82,19 @@ private struct PublishWebsite: Website {
     var favicon: Favicon? { website.favicon }
     let website: MacrinaWebsite
     
-    typealias SectionID = MacrinaSections
+    typealias SectionID = MacrinaSection
     struct ItemMetadata: WebsiteItemMetadata { }
 }
 
-struct MacrinaSections: WebsiteSectionID {
-    static var allCases: [MacrinaSections] = []
+struct MacrinaSection: WebsiteSectionID {
+    static var allCases: [MacrinaSection] = []
     var rawValue: String
     var index: Int!
-    var page: MacrinaWebpage!
+    var page: MacrinaPage!
     init?(rawValue: String) {
         self.rawValue = rawValue
     }
-    init?(index: Int, page: MacrinaWebpage) {
+    init?(index: Int, page: MacrinaPage) {
         self.init(rawValue:page.path)
         self.page = page
         self.index = index
