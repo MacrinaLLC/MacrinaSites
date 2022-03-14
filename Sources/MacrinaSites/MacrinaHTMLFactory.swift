@@ -5,11 +5,21 @@
 //  Created by jarwarren on 3/13/22.
 //
 
+import Foundation
 import Plot
 import Publish
 
 public struct MacrinaHTMLFactory<Site: Website>: HTMLFactory {
     private var sections: [MacrinaSection] { MacrinaSection.allCases }
+    private var internalResourcesPath: String {
+        URL(string: "\(#file)")!
+            .deletingPathExtension()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .appendingPathComponent("Resources")
+            .absoluteString
+    }
     public func makeIndexHTML(for index: Index, context: PublishingContext<Site>) throws -> HTML {
         makeHTML(for: 0, language: context.site.language)
     }
@@ -51,7 +61,7 @@ public struct MacrinaHTMLFactory<Site: Website>: HTMLFactory {
         HTML(
             .lang(language),
             .head(
-                .stylesheet("/air.css"),
+                .stylesheet(internalResourcesPath + "/air.css"),
                 .favicon("/favicon.ico", type: "image/ico"),
                 .meta(.charset(.utf8)),
                 .meta(
