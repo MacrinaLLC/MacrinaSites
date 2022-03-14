@@ -39,12 +39,15 @@ public protocol MacrinaWebsite {
 
 public extension MacrinaWebsite {
     var language: Language { .usEnglish }
-    func publish() throws {
+    func publish(file: StaticString = #file) throws {
         MacrinaSections.allCases = pages
             .enumerated()
             .compactMap(PublishWebsite.SectionID.init)
         try PublishWebsite(website: self)
-            .publish(withTheme: .macrina, at: Path(#file))
+            .publish(
+                withTheme: .macrina,
+                at: Path("\(file)")
+            )
     }
 }
 
