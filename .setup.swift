@@ -219,3 +219,4 @@ Remember to add MacrinaSites as a dependency to your \(TerminalColors.green)Pack
     \(TerminalColors.pink).package(name: "MacrinaSites", url: "https://github.com/MacrinaLLC/MacrinaSites.git", .branch("master"))\(TerminalColors.default)
 Use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
 """
+)
