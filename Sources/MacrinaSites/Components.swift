@@ -69,7 +69,7 @@ public struct LineBreak: Component {
 
 struct TopNavigation: Component {
     let currentIndex: Int
-    let pages: [MacrinaWebpage]
+    let pages: [MacrinaPage]
     var body: Component {
         Div {
             if pages.count > 1 {
