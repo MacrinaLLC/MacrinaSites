@@ -40,7 +40,7 @@ public protocol MacrinaWebsite {
 public extension MacrinaWebsite {
     var language: Language { .usEnglish }
     func publish(file: StaticString = #file) throws {
-        MacrinaSections.allCases = pages
+        MacrinaSection.allCases = pages
             .enumerated()
             .compactMap(PublishWebsite.SectionID.init)
         guard let containingFolder = URL(string: "\(file)") else { throw MacrinaError.unableToLocateRootFolder }
@@ -82,12 +82,12 @@ private struct PublishWebsite: Website {
     var favicon: Favicon? { website.favicon }
     let website: MacrinaWebsite
     
-    typealias SectionID = MacrinaSections
+    typealias SectionID = MacrinaSection
     struct ItemMetadata: WebsiteItemMetadata { }
 }
 
-struct MacrinaSections: WebsiteSectionID {
-    static var allCases: [MacrinaSections] = []
+struct MacrinaSection: WebsiteSectionID {
+    static var allCases: [MacrinaSection] = []
     var rawValue: String
     var index: Int!
     var page: MacrinaPage!
