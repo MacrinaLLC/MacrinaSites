@@ -4,7 +4,7 @@
 
 ### Description
 MacrinaSites is a small Swift Package built on top of [Publish](https://github.com/JohnSundell/Publish).
-All of the sites I make tend to follow a similar style, and it becomes tedius to write the same code over and over.
+All of my sites look similar and it's tedius to write the same code over and over.
 This little package is a quick way to set up a website in the same style as the others.
 
 ### Examples
@@ -17,16 +17,15 @@ This little package is a quick way to set up a website in the same style as the 
 brew install publish
 ```
 2. Create an empty folder with the name of your website.
-3. Inside of the folder run `publish new`.
+3. Inside of the folder run the following script.
+```
+curl -fsSL https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/setup.swift | swift
+```
 4. Add MacrinaSites as a dependency to your `Package.swift` file.
 ```
 .package(name: "MacrinaSites", url: "https://github.com/MacrinaLLC/MacrinaSites.git", .branch("master"))
 ```
-5. In the same, root folder of your project, run the following script to generate a template and add css to your project.
-```
-curl -s https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/setup.swift
-```
-6. Whenever you're ready, use `publish run` to generate your website in the `Output` folder. If needed, more detailed instructions can be found on the Publish readme.
+5. Whenever you're ready, use `publish run` to generate your website in the `Output` folder. If needed, more detailed instructions can be found on the Publish readme.
 ### Acknowledgements
 - [Publish](https://github.com/JohnSundell/Publish) by John Sundell
 - [Air.css](https://github.com/JarWarren/air) by John Otander
