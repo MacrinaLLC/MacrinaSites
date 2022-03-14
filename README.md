@@ -26,6 +26,7 @@ brew install publish
 ```
 todo
 ```
+6. Whenever you're ready, use `publish run` to generate your website in the `Output` folder. If needed, more detailed instructions can be found on the Publish readme.
 ### Acknowledgements
 - [Publish](https://github.com/JohnSundell/Publish) by John Sundell
 - [Air.css](https://github.com/JarWarren/air) by John Otander
