@@ -43,11 +43,27 @@ public extension MacrinaWebsite {
         MacrinaSections.allCases = pages
             .enumerated()
             .compactMap(PublishWebsite.SectionID.init)
+        guard let containingFolder = URL(string: "\(file)") else { throw MacrinaError.unableToLocateRootFolder }
+        let root = containingFolder
+           .deletingPathExtension()
+           .deletingLastPathComponent()
+           .deletingLastPathComponent()
+           .deletingLastPathComponent()
         try PublishWebsite(website: self)
             .publish(
                 withTheme: .macrina,
-                at: Path("\(file)")
+                at: Path(root.absoluteString)
             )
+    }
+}
+
+enum MacrinaError: LocalizedError {
+    case unableToLocateRootFolder
+    var errorDescription: String? {
+        switch self {
+        case .unableToLocateRootFolder:
+            return "Unable to locate the root folder."
+        }
     }
 }
 
