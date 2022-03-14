@@ -6,67 +6,6 @@ struct Command {
     let description: String
 }
 
-var currentStep = 0
-let totalSteps = 6
-var currentDirectoryName: String = {
-    FileManager
-        .default
-        .currentDirectoryPath
-        .split(separator: "/")
-        .map(String.init)
-        .last ?? ""
-}()
-
-let commands = [
-    Command(
-        arguments: "rm -rf Content",
-        description: "Deleting Content directory"
-    ),
-    Command(
-        arguments: "mkdir Content",
-        description: "Recreating Content directory"
-    ),
-    Command(
-        arguments: "touch empty",
-        description: "Making placeholder file"
-    ),
-    Command(
-        arguments: "mv empty Content/empty",
-        description: "Moving placeholder to Content directory"
-    ),
-]
-
-let deleteTemplate = Command(
-    arguments: "rm Sources/\(currentDirectoryName)/main.swift",
-    description: "Deleting original website template"
-)
-
-print("\nSetting up your Website")
-do {
-    for command in commands {
-        try Process.execute(command)
-    }
-    downloadCSS { result in
-        do {
-            try result.get()
-            try Process.execute(deleteTemplate)
-            downloadTemplate { result in
-                do {
-                    try result.get()
-                    print("\(totalSteps)/\(totalSteps) - \(TerminalColors.blue)Wrapping up...\(TerminalColors.default)")
-                } catch {
-                    failure(error)
-                }
-            }
-        } catch {
-            failure(error)
-        }
-    }
-} catch {
-    failure(error)
-}
-
-print("✅ Success! Use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
 extension Process {
     static func execute(_ command: Command) throws {
         currentStep += 1
@@ -173,10 +112,6 @@ func downloadCSS(completion: @escaping (Result<Void, Error>) -> Void) {
     RunLoop.main.run(until: Date() + 3)
 }
 
-func notifyUser(_ text: String) {
-    
-}
-
 func failure(_ error: Error) {
     print("⛔️ Error: " + error.localizedDescription)
 }
@@ -211,3 +146,66 @@ func downloadTemplate(completion: @escaping (Result<Void, Error>) -> Void) {
     }.resume()
     RunLoop.main.run(until: Date() + 3)
 }
+
+
+var currentStep = 0
+let totalSteps = 6
+var currentDirectoryName: String = {
+    FileManager
+        .default
+        .currentDirectoryPath
+        .split(separator: "/")
+        .map(String.init)
+        .last ?? ""
+}()
+
+let commands = [
+    Command(
+        arguments: "rm -rf Content",
+        description: "Deleting Content directory"
+    ),
+    Command(
+        arguments: "mkdir Content",
+        description: "Recreating Content directory"
+    ),
+    Command(
+        arguments: "touch empty",
+        description: "Making placeholder file"
+    ),
+    Command(
+        arguments: "mv empty Content/empty",
+        description: "Moving placeholder to Content directory"
+    ),
+]
+
+let deleteTemplate = Command(
+    arguments: "rm Sources/\(currentDirectoryName)/main.swift",
+    description: "Deleting original website template"
+)
+
+print("\nSetting up your Website")
+do {
+    for command in commands {
+        try Process.execute(command)
+    }
+    downloadCSS { result in
+        do {
+            try result.get()
+            try Process.execute(deleteTemplate)
+            downloadTemplate { result in
+                do {
+                    try result.get()
+                    print("\(totalSteps)/\(totalSteps) - \(TerminalColors.blue)Wrapping up...\(TerminalColors.default)")
+                } catch {
+                    failure(error)
+                }
+            }
+        } catch {
+            failure(error)
+        }
+    }
+} catch {
+    failure(error)
+}
+
+print("✅ Success! Use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
