@@ -44,7 +44,7 @@ public extension MacrinaWebsite {
             .enumerated()
             .compactMap(PublishWebsite.SectionID.init)
         try PublishWebsite(website: self)
-            .publish(withTheme: .macrina)
+            .publish(withTheme: .macrina, at: Path(#file))
     }
 }
 
