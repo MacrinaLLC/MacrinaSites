@@ -30,11 +30,11 @@ public struct MacrinaHTMLFactory<Site: Website>: HTMLFactory {
     }
     
     public func makeTagListHTML(for page: TagListPage, context: PublishingContext<Site>) throws -> HTML? {
-        nil
+        filler("Tag List")
     }
     
     public func makeTagDetailsHTML(for page: TagDetailsPage, context: PublishingContext<Site>) throws -> HTML? {
-        nil
+        filler("Tag Details")
     }
     
     private func filler(_ text: String) -> HTML {
