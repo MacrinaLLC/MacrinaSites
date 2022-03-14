@@ -9,7 +9,7 @@ struct Command {
 }
 
 var currentStep = 0
-let totalSteps = 6
+let totalSteps = 7
 var currentDirectoryName: String = {
     FileManager
         .default
@@ -20,6 +20,10 @@ var currentDirectoryName: String = {
 }()
 
 let commands = [
+    Command(
+        arguments: "publish new",
+        description: "Generating source files with \(TerminalColors.pink)publish new\(TerminalColors.default)."
+    ),
     Command(
         arguments: "rm -rf Content",
         description: "Deleting Content directory"
