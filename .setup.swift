@@ -212,4 +212,10 @@ do {
     failure(error)
 }
 
-print("✅ Success! Use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
+print(
+"""
+✅ Success!
+Remember to add MacrinaSites as a dependency to your \(TerminalColors.green)Package.swift\(TerminalColors.default)
+    \(TerminalColors.pink).package(name: "MacrinaSites", url: "https://github.com/MacrinaLLC/MacrinaSites.git", .branch("master"))\(TerminalColors.default)
+Use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
+"""
