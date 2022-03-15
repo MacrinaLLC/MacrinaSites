@@ -254,11 +254,11 @@ print(
 ✅ Success!
 
 ------------------------
-Remember to add MacrinaSites as a dependency to your \(TerminalColors.green)Package.swift\(TerminalColors.default)
+⚠️ Remember to add MacrinaSites as a dependency to your \(TerminalColors.green)Package.swift\(TerminalColors.default)
 
-\(TerminalColors.red).package(name: "MacrinaSites", url: "https://github.com/MacrinaLLC/MacrinaSites.git", .branch("master"))\(TerminalColors.default)
+\(TerminalColors.blue).package(name: "MacrinaSites", url: "https://github.com/MacrinaLLC/MacrinaSites.git", .branch("master"))\(TerminalColors.default)
 
-Add \(TerminalColors.red)"MacrinaSites"\(TerminalColors.default) to the array of dependencies as well!
+⚠️ Add \(TerminalColors.blue)"MacrinaSites"\(TerminalColors.default) to the array of dependencies as well!
 ------------------------
 
 Afterwards, use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
