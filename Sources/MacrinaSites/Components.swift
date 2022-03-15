@@ -11,9 +11,9 @@ import Plot
 /// An Image with custom CSS styling.
 public struct MacrinaImage: Component {
     let name: String
-    let style: Style
+    let style: ImageStyle
     
-    init(_ name: String, style: Style) {
+    init(_ name: String, style: ImageStyle) {
         self.name = name
         self.style = style
     }
@@ -23,7 +23,7 @@ public struct MacrinaImage: Component {
             .class(style.rawValue)
     }
     
-    enum Style: String {
+    enum ImageStyle: String {
         /// 200 x 200 circular image
         case circle
         /// 120 x 120 square image
