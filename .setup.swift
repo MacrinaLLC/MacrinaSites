@@ -261,6 +261,6 @@ print(
 ⚠️ Add \(TerminalColors.blue)"MacrinaSites"\(TerminalColors.default) to the array of dependencies as well!
 ------------------------
 
-Afterwards, use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
+Afterwards, use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.
 """
 )
