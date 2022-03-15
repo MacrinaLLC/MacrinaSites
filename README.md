@@ -21,7 +21,7 @@ brew install publish
 ```
 curl -s https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/setup.sh | bash
 ```
-4. Add MacrinaSites as a dependency to your `Package.swift` file.
+4. Add MacrinaSites as a dependency to your `Package.swift` file and `"MacrinaSites"` to the array of dependencies.
 ```
 .package(name: "MacrinaSites", url: "https://github.com/MacrinaLLC/MacrinaSites.git", .branch("master"))
 ```
