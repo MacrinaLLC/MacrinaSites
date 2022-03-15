@@ -36,6 +36,9 @@ public struct MacrinaImage: Component {
 /// Swift wrapper for the horizontal row `<hr>` HTML tag.
 public struct Divider: Component {
     var width: Int?
+    public init(width: Int? = nil) {
+        self.width = width
+    }
     public var body: Component {
         if let width = width {
             return Element(name: "hr", content: {})
@@ -50,6 +53,7 @@ public typealias HorizontalRow = Divider
 
 /// Swift wrapper for the linbreak `<br>` HTML tag.
 public struct LineBreak: Component {
+    public init() {}
     public var body: Component {
         Element(name: "br", content: {})
     }
