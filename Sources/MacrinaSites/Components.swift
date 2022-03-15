@@ -13,7 +13,7 @@ public struct MacrinaImage: Component {
     let name: String
     let style: ImageStyle
     
-    init(_ name: String, style: ImageStyle) {
+    public init(_ name: String, style: ImageStyle) {
         self.name = name
         self.style = style
     }
@@ -23,7 +23,7 @@ public struct MacrinaImage: Component {
             .class(style.rawValue)
     }
     
-    enum ImageStyle: String {
+    public enum ImageStyle: String {
         /// 200 x 200 circular image
         case circle
         /// 120 x 120 square image
