@@ -113,6 +113,36 @@ func downloadCSS(completion: @escaping (Result<Void, Error>) -> Void) {
     RunLoop.main.run(until: Date() + 3)
 }
 
+func downloadSwiftLogo(completion: @escaping (Result<Void, Error>) -> Void) {
+    print("Downloading \(TerminalColors.green)swift-logo.webp\(TerminalColors.default) to Resources/")
+    guard let url = URL(string: "https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/swift-logo.webp") else {
+        return completion(.failure(SetupError(errorDescription: "Invalid URL for image")))
+    }
+    URLSession.shared.dataTask(with: url) { data, _, error in
+        if let error = error {
+            completion(.failure(error))
+        }
+        guard let data = data else {
+            return completion(.failure(SetupError(errorDescription: "Unable to locate image")))
+        }
+        
+        guard let currentDirectory = Process().currentDirectoryURL else {
+            return completion(.failure(SetupError(errorDescription: "Unable to save image")))
+        }
+        let targetDirectory = currentDirectory
+            .appendingPathComponent("Resources")
+            .appendingPathComponent("swift-logo")
+            .appendingPathExtension("webp")
+        do {
+            try data.write(to: targetDirectory)
+            completion(.success(()))
+        } catch {
+            completion(.failure(error))
+        }
+    }.resume()
+    RunLoop.main.run(until: Date() + 3)
+}
+
 func failure(_ error: Error) {
     print("⛔️ Error: " + error.localizedDescription)
 }
@@ -199,7 +229,14 @@ do {
             downloadTemplate { result in
                 do {
                     try result.get()
-                    print("\(totalSteps)/\(totalSteps) - \(TerminalColors.blue)Wrapping up...\(TerminalColors.default)")
+                    downloadSwiftLogo { result in
+                        do {
+                            try result.get()
+                            print("\(totalSteps)/\(totalSteps) - \(TerminalColors.blue)Wrapping up...\(TerminalColors.default)")
+                        } catch {
+                            failure(error)
+                        }
+                    }
                 } catch {
                     failure(error)
                 }
@@ -215,8 +252,15 @@ do {
 print(
 """
 ✅ Success!
+
+------------------------
 Remember to add MacrinaSites as a dependency to your \(TerminalColors.green)Package.swift\(TerminalColors.default)
-    \(TerminalColors.pink).package(name: "MacrinaSites", url: "https://github.com/MacrinaLLC/MacrinaSites.git", .branch("master"))\(TerminalColors.default)
-Use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
+
+\(TerminalColors.red).package(name: "MacrinaSites", url: "https://github.com/MacrinaLLC/MacrinaSites.git", .branch("master"))\(TerminalColors.default)
+
+Add \(TerminalColors.red)"MacrinaSites"\(TerminalColors.default) to the array of dependencies as well!
+------------------------
+
+Afterwards, use \(TerminalColors.pink)publish run\(TerminalColors.default) to test out your website.")
 """
 )
