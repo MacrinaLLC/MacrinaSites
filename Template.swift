@@ -28,13 +28,15 @@ try HelloWorld().publish()
 
 
 // MARK: Sample Pages
+// A MacrinaPage will typically exist in its own file. These are just a few examples.
 
 struct Home: MacrinaPage {
+    // Displayed in an `<h1>` at the top of each page
     var title: String = "Home"
     var path: String = "/"
     var body: Component {
         Div {
-            MacrinaImage("swift-logo.webp", style: .circle)
+            MacrinaImage("swift-logo.webp", style: .circle) // Use `Image` for standard <img> or `MacrinaImage` if you want some css styling built in.
         }
     }
     var footer: Component?
@@ -45,23 +47,14 @@ struct About: MacrinaPage {
     var path: String = "/about"
     var body: Component {
         Div {
-            H2("About Me")
+            H2("Bio")
             Paragraph("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
             Divider()
-            Image("swift-logo.webp")
-            Divider()
-            H2("More About Me")
+            H2("Projects")
             Paragraph("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.")
         }
     }
-    var footer: Component? {
-        Footer {
-            Div {
-                Text("A custom footer ")
-                MacrinaImage("swift-logo.webp", style: .icon)
-            }
-        }
-    }
+    var footer: Component?
 }
 
 struct Contact: MacrinaPage {
@@ -69,9 +62,18 @@ struct Contact: MacrinaPage {
     var path: String = "/contact"
     var body: Component {
         Div {
-            Text("Link to my ")
-            Link("Website", url: "/")
+            Paragraph("myemail@thiswebsite.com")
+            Divider(width: 12)
+            Paragraph("1 (123) 123-1234")
         }
     }
-    var footer: Component?
+    
+    // An example of overriding the default footer
+    var footer: Component? {
+        Footer {
+            Div {
+                Text("the end")
+            }
+        }
+    }
 }
