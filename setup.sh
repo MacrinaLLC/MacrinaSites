@@ -4,3 +4,4 @@ curl https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/.setup.swi
 chmod +x .setup.swift
 swift .setup.swift
 rm .setup.swift
+open Package.swift
