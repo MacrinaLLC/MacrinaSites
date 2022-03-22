@@ -8,8 +8,8 @@ struct HelloWorld: MacrinaWebsite {
 
     // Update these properties to configure your website:
     var url = URL(string: "https://your-website-url.com")!
-    var name = "Hello World"
-    var description = "A description of Hello World"
+    var name = "New Website"
+    var description = "A description of New Website"
     var language: Language = .usEnglish
     var favicon: Favicon?
     // Path to the image that represents your website
@@ -36,7 +36,7 @@ struct Home: MacrinaPage {
     var path: String = "/"
     var body: Component {
         Div {
-            MacrinaImage("swift-logo.webp", style: .circle) // Use `Image` for standard <img> or `MacrinaImage` if you want some css styling built in.
+            MacrinaImage("/swift-logo.webp", style: .circle) // Use `Image` for standard <img> or `MacrinaImage` if you want some css styling built in.
         }
     }
     var footer: Component?
