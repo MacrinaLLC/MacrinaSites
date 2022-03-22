@@ -10,7 +10,7 @@ struct Command {
 extension Process {
     static func execute(_ command: Command) throws {
         currentStep += 1
-        print("\(currentStep)/\(totalSteps) - " + TerminalColors.blue + command.description + TerminalColors.default)
+        print(TerminalColors.blue + "[\(currentStep)/\(totalSteps)] " + TerminalColors.default + command.description)
         let process = Process()
         process.launchPath = "/bin/bash"
         process.arguments = ["-c", command.arguments]
@@ -85,7 +85,7 @@ extension Data {
 
 func downloadCSS(completion: @escaping (Result<Void, Error>) -> Void) {
     print("Downloading \(TerminalColors.green)air.css\(TerminalColors.default) to Resources/")
-    guard let url = URL(string: "https://raw.githubusercontent.com/JarWarren/air/master/css/air.css") else {
+    guard let url = URL(string: "https://raw.githubusercontent.com/MacrinaLLC/MacrinaSites/master/air.css") else {
         return completion(.failure(SetupError(errorDescription: "Invalid URL for css")))
     }
     URLSession.shared.dataTask(with: url) { data, _, error in
@@ -232,7 +232,7 @@ do {
                     downloadSwiftLogo { result in
                         do {
                             try result.get()
-                            print("\(totalSteps)/\(totalSteps) - \(TerminalColors.blue)Wrapping up...\(TerminalColors.default)")
+                            print("\(TerminalColors.blue)[\(totalSteps)/\(totalSteps)]\(TerminalColors.default) Wrapping up...")
                         } catch {
                             failure(error)
                         }
