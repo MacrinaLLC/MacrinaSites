@@ -4,12 +4,6 @@
 
 ### Description
 MacrinaSites is a small Swift Package built on top of [Publish](https://github.com/JohnSundell/Publish).
-All of my sites look similar and it's tedius to write the same code over and over.
-This little package is a quick way to set up a website in the same style as the others.
-
-### Examples
-- Macrina Website - [link](https://macrina.tech)
-- JarWarren - [link](https://jarwarren.github.io)
 
 ### Installation
 1. Make sure that Publish is installed. The easiest way is with Homebrew.
