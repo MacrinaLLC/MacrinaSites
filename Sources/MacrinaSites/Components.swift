@@ -26,8 +26,10 @@ public struct MacrinaImage: Component {
     public enum ImageStyle: String {
         /// 200 x 200 circular image
         case circle
-        /// 120 x 120 square image
-        case logo
+        /// 80 x 80 square image with rounded corners
+        case roundedLogo
+        /// 64 x 64 square image
+        case squareLogo
         /// 16 x 16 icon image
         case icon
     }
